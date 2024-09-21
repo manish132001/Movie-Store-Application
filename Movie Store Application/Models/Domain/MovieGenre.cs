@@ -1,5 +1,4 @@
-﻿using Microsoft.Build.Framework;
-
+﻿
 namespace Movie_Store_Application.Models.Domain
 {
     public class MovieGenre

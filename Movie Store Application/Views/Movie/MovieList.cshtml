@@ -1,0 +1,31 @@
+﻿@model List<Movie_Store_Application.Models.Domain.Movie>
+
+<div class="tbl-container">
+    <h2>Genres</h2>
+
+    <table>
+        <tr>
+            <th>MovieName</th>
+            <th>ReleaseYear</th>
+            <th>Cast</th>
+            <th>Director</th>
+            <th>Genre</th>
+
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.ReleaseYear</td>
+                <td>@item.Cast</td>
+                <td>@item.Director</td>
+                <td>@item.GenreNames</td>
+
+            </tr>
+        }
+
+    </table>
+    <div class="input-container">
+        <a href="/Movie/Add" class="btn btn-sec">Back</a>
+    </div>
+</div>

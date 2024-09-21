@@ -2,6 +2,9 @@
 @{
 }
 
+<scripts src="~/wwwroot/js/jquery-3.7.1.min.js"></scripts>
+<scripts src="~/wwwroot/js/site.js"></scripts>
+
 <form class="w-40" asp-action="login" method="post">
 
     <h2 class="pb-10">Login</h2>
@@ -35,5 +38,10 @@
         
         <button class="btn btn-default" type="submit">Login</button>
         @*<a class="btn btn-sec" href="#">Add more</a>*@
+    </div>
+    <div>
+        Not have an account??
+        <a  href="/UserAuthentication/Register">Register</a>
+
     </div>
 </form>

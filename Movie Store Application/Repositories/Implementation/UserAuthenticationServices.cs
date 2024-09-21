@@ -21,7 +21,6 @@ namespace Movie_Store_Application.Repositories.Implementation
             this.signInManager = signInManager;
 
         }
-
         public async Task<Status> RegistrationAsync(Registration model)
         {
             var status = new Status();
