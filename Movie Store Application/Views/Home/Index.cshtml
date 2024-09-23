@@ -1,1 +1,39 @@
-﻿
+﻿@model List<Movie_Store_Application.Models.Domain.Movie>
+<div>
+    
+    <div class="tbl-container">
+        <h2>Movies</h2>
+        <input style="font-size: 18px;padding-left: 10px;" id="searchMovies" class="input-container" type="text" placeholder="Search..">
+        <table id="moviesTable">
+            <thead>
+                <tr>
+                    <th>MovieName</th>
+                    <th>ReleaseYear</th>
+                    <th>Cast</th>
+                    <th>Director</th>
+                    <th>Genre</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                
+                    @foreach (var item in Model)
+                    {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.ReleaseYear</td>
+                    <td>@item.Cast</td>
+                    <td>@item.Director</td>
+                    <td>@item.GenreNames</td>
+
+                </tr>
+                    }
+                
+            </tbody>
+           
+
+        </table>
+       
+    </div>
+</div>
+

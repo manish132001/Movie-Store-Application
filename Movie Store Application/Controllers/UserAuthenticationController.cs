@@ -21,15 +21,7 @@ namespace Movie_Store_Application.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(Registration model)
         {
-            //var model = new Registration()
-            //{
-            //    Email = "admin@gmail.com",
-            //    Username = "admin",
-            //    Name = "Ravindra",
-            //    Password = "Admin@123",
-            //    PasswordConfirm = "Admin@123",
-            //    Role = "Admin"
-            //};
+            
             var result = await authservices.RegistrationAsync(model);
             return Ok(result.Message);
         }
@@ -44,10 +36,12 @@ namespace Movie_Store_Application.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-
             var result = await authservices.LoginAsync(model);
             if (result.StatusCode == 1)
+            {
+                //HttpContext.Session.SetString("Username", model.Username); 
                 return RedirectToAction("Index", "Home");
+            }
             else
             {
                 TempData["msg"] = "Could not logged in..";
@@ -57,6 +51,7 @@ namespace Movie_Store_Application.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            HttpContext.Session.Clear();
             await authservices.LogoutAsync();
             return RedirectToAction(nameof(Login));
         }
