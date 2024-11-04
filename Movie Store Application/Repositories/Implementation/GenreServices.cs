@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 using Movie_Store_Application.Models.Domain;
 using Movie_Store_Application.Repositories.Abstraction;
+using System.Data;
 
 namespace Movie_Store_Application.Repositories.Implementation
 {
@@ -14,16 +17,20 @@ namespace Movie_Store_Application.Repositories.Implementation
         }
         public bool Add(Genre model)
         {
-            try
+            using (var transaction = ctx.Database.BeginTransaction())
             {
-                ctx.Genre.Add(model);
-                ctx.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                
-                return false;
+                try
+                {
+                    ctx.Genre.Add(model);
+                    ctx.SaveChanges();
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
             }
         }
 

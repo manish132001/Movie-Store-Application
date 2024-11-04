@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Movie_Store_Application.Models.Domain;
 using Movie_Store_Application.Repositories.Abstraction;
 using Movie_Store_Application.Repositories.Implementation;
+using Movie_Store_Application.Shared;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,6 +51,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -62,12 +64,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseMiddleware<SecurityHeadersMiddleware>();
 app.UseRouting();
-app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}");

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using Movie_Store_Application.Shared;
 using static System.Net.Mime.MediaTypeNames;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -11,8 +11,10 @@ namespace Movie_Store_Application.Controllers
     public class HomeController : Controller
     {
         private readonly IMovieServices _movieServices;
+        private GetList getList;
         public HomeController(IMovieServices movieServices)
         {
+            getList = GetList.Instance();
             this._movieServices = movieServices;
         }
         public ActionResult Index()
@@ -22,6 +24,7 @@ namespace Movie_Store_Application.Controllers
         }
         public ActionResult About()
         {
+            ViewBag.res = getList.text;
             return View();
         }
 
